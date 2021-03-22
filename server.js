@@ -9,12 +9,16 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/', async (req, res) => {
-  const { url } = req.body;
+  try {
+    const { url } = req.body;
 
-  const response = await fetch(url);
-  const data = await response.json();
-
-  res.json(data);
+    const response = await fetch(url);
+    const data = await response.json();
+  
+    res.json(data);
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 
 app.listen(PORT, () => {
